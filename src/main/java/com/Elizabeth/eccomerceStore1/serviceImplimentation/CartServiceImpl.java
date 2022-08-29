@@ -18,18 +18,19 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     CartRepository cartRepository;
-    @Autowired
+
     CartItemRepository cartItemRepository;
 
     @Override
     public Cart addItemToCart(Product product, int quantity, User user) {
+
         Cart cart = user.getCart();
 
         if(cart == null){
             cart = new Cart();
         }
         Set<CartItem> cartItems = cart.getCartItem();
-        CartItem cartItem = findCartItem(cartItems, product.getId());
+        CartItem cartItem = findCartItem(cartItems, product.getProductId());
         if(cartItems == null){
             cartItems = new HashSet<>();
             if(cartItem == null){
@@ -66,7 +67,7 @@ public class CartServiceImpl implements CartService {
 
         Cart cart = user.getCart();
         Set<CartItem> cartItems = cart.getCartItem();
-        CartItem item = findCartItem(cartItems, product.getId());
+        CartItem item = findCartItem(cartItems, product.getProductId());
         cartItems.remove(item);
         cartItemRepository.delete(item);
 
@@ -82,6 +83,8 @@ public class CartServiceImpl implements CartService {
     }
 
 
+
+
     private CartItem findCartItem(Set<CartItem> cartItems, Long productId){
         if(cartItems == null){
             return  null;
@@ -89,7 +92,7 @@ public class CartServiceImpl implements CartService {
             CartItem cartItem = null;
 
             for(CartItem item : cartItems){
-                if(item.getProduct().getId() == productId){
+                if(item.getProduct().getProductId() == productId){
                     cartItem =item;
                 }
             }
@@ -114,6 +117,11 @@ public class CartServiceImpl implements CartService {
         }
         return totalPrice;
     }
+
+//    public List<CartItem> getCart(String email) {
+//        return cartItemRepository.findByEmail(email).orElseThrow(()->
+//                new CustomAppException("Nothing Found"));
+//    }
 
 
 }

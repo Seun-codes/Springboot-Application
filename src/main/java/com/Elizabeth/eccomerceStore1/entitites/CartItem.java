@@ -15,6 +15,8 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_detail_id")
     private long id;
+    private String email;
+
     private int quantity;
     private double totalPrice;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

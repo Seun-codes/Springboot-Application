@@ -1,14 +1,11 @@
 package com.Elizabeth.eccomerceStore1.entitites;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
+@Data
 @ToString
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "Products")
@@ -16,7 +13,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id", nullable = false)
-    private Long id;
+    private Long productId;
 
     @Column(nullable = false)
     private String name;
@@ -27,21 +24,13 @@ public class Product {
     @Column(nullable = false)
     private float price;
 
-    @Column(nullable = false)
+
     private int quantity;
+    @Column(nullable = false)
+    private String category;
+    private String image;
 
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Product product = (Product) o;
-        return id != null && Objects.equals(id, product.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

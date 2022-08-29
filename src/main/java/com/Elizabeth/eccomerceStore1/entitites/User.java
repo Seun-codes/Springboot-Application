@@ -25,12 +25,19 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "address", nullable = true)
-    private String address;
-    @Column(name = "phone" , nullable = true)
-    private String phone;
     @OneToOne(mappedBy = "user")
     private Cart cart;
+
+
+
+
+    public User(String firstName, String lastName, String username, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
 
 }
